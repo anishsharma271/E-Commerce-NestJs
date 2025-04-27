@@ -8,8 +8,10 @@ import { User } from 'src/auth/entities/user.entity';
 import { ResponseInterceptor } from 'src/utils/interceptor/response.interceptor';
 import { RolesGuard } from 'src/utils/guards/roles.guard';
 import { Role } from 'src/utils/decorators/roles.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('orders')
+@ApiTags('Order')
 @UseInterceptors(ResponseInterceptor)
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) { }

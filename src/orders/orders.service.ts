@@ -14,11 +14,11 @@ export class OrdersService {
     @InjectRepository(CartEntity)
     private readonly cartRepository: Repository<CartEntity>,
 
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    // @InjectRepository(User)
+    // private readonly userRepository: Repository<User>,
     
-    @InjectRepository(User)
-    private readonly OrderItemRepository: Repository<OrderItem>,
+    // @InjectRepository(OrderItem)
+    // private readonly OrderItemRepository: Repository<OrderItem>,
 
     @InjectRepository(OrderEntity)
     private readonly OrderRepository: Repository<OrderEntity>,

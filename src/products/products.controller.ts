@@ -5,14 +5,19 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { JwtAuthGuard } from 'src/utils/guards/jwt-auth.guard';
 import { AdminGuard } from 'src/utils/guards/admin.guard';
 import { ResponseInterceptor } from 'src/utils/interceptor/response.interceptor';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('products')
+@ApiTags('products')
 @UseInterceptors(ResponseInterceptor)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) { }
 
   @Post("addProduct")
   @UseGuards(JwtAuthGuard, AdminGuard)
+   @ApiOperation({ summary: 'Create a new product' })
+    @ApiResponse({ status: 201, description: 'Product created successfully.' })
+    @ApiResponse({ status: 400, description: 'Bad Request' })
   async addProduct(@Body() createProductDto: CreateProductDto) {
     try {
       const result = await this.productsService.createProduct(createProductDto);

@@ -8,6 +8,7 @@ import { OrdersModule } from './orders/orders.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PaymentsModule } from './payments/payments.module';
 import { DataSource } from 'typeorm';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { DataSource } from 'typeorm';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     AuthModule,
     ProductsModule,
     CartModule,

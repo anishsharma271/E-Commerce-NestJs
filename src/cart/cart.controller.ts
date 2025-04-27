@@ -6,9 +6,11 @@ import { JwtAuthGuard } from 'src/utils/guards/jwt-auth.guard';
 import { ResponseInterceptor } from 'src/utils/interceptor/response.interceptor';
 import { GetUser } from 'src/utils/decorators/get-user.decorator';
 import { User } from 'src/auth/entities/user.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('cart')
 @UseInterceptors(ResponseInterceptor)
+@ApiTags('Cart')
 export class CartController {
   constructor(private readonly cartService: CartService) { }
 
@@ -26,10 +28,10 @@ export class CartController {
   @Get('my-cart')
   @UseGuards(JwtAuthGuard)
   async getMyCart(@GetUser() user: User) {
-  
+
     try {
       const result = await this.cartService.getCartByUser(user.id);;
-      return { msg: "Cart fetched successfully!", data:result };
+      return { msg: "Cart fetched successfully!", data: result };
     } catch (err) {
       throw new InternalServerErrorException(err.message || 'Something went wrong');
     }
