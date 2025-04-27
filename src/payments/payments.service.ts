@@ -36,28 +36,16 @@ export class PaymentsService {
     }
 
     // // --- Here you call your Payment Gateway (eg. Razorpay, Stripe) ---
-    // const paymentIntent = await this.paymentProvider.createPaymentIntent({
-    //   amount: Number(order.totalAmount) * 100, // In paisa or cents
-    //   currency: 'INR', // or USD
-    //   metadata: { orderId: order.id, userId: user.id },
-    // });
-
-    // return {
-    //   clientSecret: paymentIntent.client_secret,  // For Stripe
-    //   paymentId: paymentIntent.id,                // For Razorpay
-    // };
+    // here we can use the payment gateway for create the payment order 
+    // razorpay , Payu , stripe etc
   }
 
 
   async verifyPayment(user: User, verifyDto: any) {
     const { paymentId, orderId, signature } = verifyDto;
 
-    // Verify payment signature using your payment provider
-    // const isValid = await this.paymentProvider.verifyPaymentSignature(paymentId, orderId, signature);
-
-    // if (!isValid) {
-    //   throw new BadRequestException('Payment verification failed.');
-    // }
+    //  verify the payment after done by user we will place this api webhook in payment gateway webhook 
+    // it automatically trigger when user done payment through this we will update the success payment in our db 
 
     const order = await this.OrderRepository.findOne({
       where: { id: orderId, user: { id: user.id } },
